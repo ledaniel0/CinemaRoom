@@ -12,12 +12,12 @@ public class MovieSchedule {
 
     // Add a movie to the schedule
     public void addMovieToSchedule(Movie movie) {
-        // Code to add movie to the schedule
+        schedule.add(movie);
     }
 
     // Remove a movie from the schedule
     public void removeMovieFromSchedule(Movie movie) {
-        // Code to remove movie from the schedule
+        schedule.remove(movie);
     }
 
     // Get the movie schedule
