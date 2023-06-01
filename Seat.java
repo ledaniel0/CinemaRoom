@@ -29,11 +29,14 @@ public class Seat {
         this.available = available;
     }
 
-    public Seat getNext() {
-        return next;
-    }
-
     public void setNext(Seat next) {
         this.next = next;
     }
+    
+    public boolean setSeat(Seat seat) {
+        if (seat.isAvailable()) {       
+            return true; 
+        }    
+    return false; 
+}
 }
