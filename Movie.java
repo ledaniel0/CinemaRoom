@@ -4,20 +4,47 @@ public class Movie {
     private String title;
     private String director;
     private int duration;
+    private int ticketSales;
     private double revenue;
+    private double ticketPrice;
     public Movie next;
 
-    // Constructor to initialize the Movie object
-    public Movie(String title, String director, int duration) {
+    public Movie(String title, String director, int duration, double ticketPrice) {
         this.title = title;
         this.director = director;
         this.duration = duration;
+        this.ticketPrice = ticketPrice;
         this.revenue = 0;
+        this.ticketSales = 0;
         this.next = null;
+    }
+
+    public void incrementTicketSales() {
+        this.ticketPrice++;
     }
 
     public void addToRevenue(double price) {
         this.revenue += price;
+    }
+
+    public double getRevenue() {
+        return this.revenue;
+    }
+
+    public void setRevenue(double revenue) {
+        this.revenue = revenue;
+    }
+
+    public double getTicketPrice() {
+        return this.ticketPrice;
+    }
+
+    public void setTicketPrice(double ticketPrice) {
+        this.ticketPrice = ticketPrice;
+    }
+
+    public int getTicketSales() {
+        return this.ticketSales;
     }
 
     public String getTitle() {
