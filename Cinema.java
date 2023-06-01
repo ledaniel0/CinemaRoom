@@ -1,55 +1,50 @@
 package FinalProject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class Cinema {
-    private List<Movie> movies;
-    private Map<Integer, Seat> seats;
+    private MovieLinkedList movies;
+    private SeatLinkedList seats;
     private MovieSchedule movieSchedule;
 
-    // Constructor to initialize the Cinema object
     public Cinema() {
-        movies = new ArrayList<>();
-        seats = new HashMap<>();
+        movies = new MovieLinkedList();
+        seats = new SeatLinkedList();
         movieSchedule = new MovieSchedule();
     }
 
-    // Add a movie to the cinema
     public void addMovie(Movie movie) {
-        // Code to add movie to the movies list
+        movies.addMovie(movie);
     }
 
-    // Remove a movie from the cinema
     public void removeMovie(Movie movie) {
-        // Code to remove movie from the movies list
+        movies.removeMovie(movie);
     }
 
-    // Get the list of available movies
-    public List<Movie> getMovies() {
-        // Code to retrieve the movies list
+    public MovieLinkedList getMovies() {
         return movies;
     }
 
-    // Sell a ticket for a movie
-    public void sellTicket(Movie movie, Seat seat, Customer customer) {
-        // Code to sell a ticket for the given movie and seat to the customer
-    }
-
-    // Check seat availability for a movie
     public boolean isSeatAvailable(Movie movie, Seat seat) {
         // Code to check if the given seat is available for the movie
         return false;
     }
 
-    // Show statistics of ticket sales
-    public void showStatistics() {
-        // Code to display statistics such as ticket sales, revenue, etc.
+    public void sellTicket(Movie movie, Seat seat, Customer customer) {
+        if (isSeatAvailable(movie, seat)) {
+            seat.setSold(true);
+            movie.incrementTicketSales();
+            movie.addToRevenue(movie.getTicketPrice());
+            customer.setSeat(seat);
+            System.out.println("Ticket sold successfully.");
+        } else {
+            System.out.println("Sorry, the seat is not available.");
+        }
     }
 
-    // Get the movie schedule
+    public void showStatistics() {
+        System.out.println("Ticket Sales Statistics:");
+        movies.traverse();
+    }
+
     public MovieSchedule getMovieSchedule() {
         return movieSchedule;
     }
