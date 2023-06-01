@@ -33,8 +33,8 @@ public class Seat {
         this.next = next;
     }
     
-    public boolean setSeat(Seat seat) {
-        if (seat.isAvailable()) {       
+    public boolean setSold(Seat seat) {
+        if (!seat.isAvailable()) {       
             return true; 
         }    
     return false; 
