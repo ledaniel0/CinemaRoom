@@ -1,6 +1,6 @@
 package FinalProject
 
-class MovieLinkedList {
+public class MovieLinkedList {
     private Movie head;
 
     public MovieLinkedList() {
