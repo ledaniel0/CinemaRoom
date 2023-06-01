@@ -4,6 +4,7 @@ public class Movie {
     private String title;
     private String director;
     private int duration;
+    private double revenue;
     public Movie next;
 
     // Constructor to initialize the Movie object
@@ -11,7 +12,12 @@ public class Movie {
         this.title = title;
         this.director = director;
         this.duration = duration;
+        this.revenue = 0;
         this.next = null;
+    }
+
+    public void addToRevenue(double price) {
+        this.revenue += price;
     }
 
     public String getTitle() {
