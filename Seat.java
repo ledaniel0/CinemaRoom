@@ -4,7 +4,7 @@ public class Seat {
     private int row;
     private int column;
     private boolean available;
-    private Seat next;
+    public Seat next;
 
     public Seat(int row, int column) {
         this.row = row;
@@ -29,14 +29,15 @@ public class Seat {
         this.available = available;
     }
 
-    public void setNext(Seat next) {
-        this.next = next;
+    public boolean getSold(Seat seat) {
+        if (!seat.isAvailable()) {
+            return true;
+        }
+        return false;
     }
-    
-    public boolean setSold(Seat seat) {
-        if (!seat.isAvailable()) {       
-            return true; 
-        }    
-    return false; 
+
+    public void setSold() {
+        this.available = false;
+    }
 }
-}
+
