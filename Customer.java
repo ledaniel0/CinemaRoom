@@ -13,7 +13,7 @@ public class Customer {
     }
 
     // Getters and setters for the customer attributes
-     public Customer(String name, String email) {
+    public Customer(String name, String email) {
         this.name = name;
         this.email = email;
     }
@@ -33,12 +33,20 @@ public class Customer {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    public void setSeat(Seat seat){
+
+    public void setSeat(Seat seat) {
         this.seat = seat;
     }
-    
-    public int getSeat(){
+
+    public Seat getSeat() {
         return seat;
     }
+    
+    @Override
+    public String toString() {
+        return "Name: " + this.name +
+                "\nEmail: " + this.email +
+                "\nSeat: " + this.seat;
+    }
 }
+
