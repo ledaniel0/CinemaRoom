@@ -3,10 +3,10 @@ package FinalProject;
 public class Customer {
     private String name;
     private String email;
-    private int seat;
+    private Seat seat;
 
     // Constructor to initialize the Customer object
-    public Customer(String name, String email, int seat) {
+    public Customer(String name, String email, Seat seat) {
         this.name = name;
         this.email = email;
         this.seat = seat;
@@ -34,7 +34,7 @@ public class Customer {
         this.email = email;
     }
     
-    public void setSeat(int seat){
+    public void setSeat(Seat seat){
         this.seat = seat;
     }
     
