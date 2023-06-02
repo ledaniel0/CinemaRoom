@@ -30,7 +30,7 @@ public class Cinema {
 
     public void sellTicket(Movie movie, Seat seat, Customer customer) {
         if (isSeatAvailable(movie, seat)) {
-            seat.setSold(true);
+            seat.setSold();
             movie.incrementTicketSales();
             movie.addToRevenue(movie.getTicketPrice());
             customer.setSeat(seat);
@@ -49,3 +49,4 @@ public class Cinema {
         return movieSchedule;
     }
 }
+
