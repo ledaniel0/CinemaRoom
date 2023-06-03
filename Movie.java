@@ -7,7 +7,7 @@ public class Movie {
     private int ticketSales;
     private double revenue;
     private double ticketPrice;
-    private SeatLinkedList seats;
+    public SeatHashTable seats;
     public Movie next;
 
     public Movie(String title, String director, int duration, double ticketPrice) {
@@ -17,12 +17,16 @@ public class Movie {
         this.ticketPrice = ticketPrice;
         this.revenue = 0;
         this.ticketSales = 0;
-        this.seats = new SeatLinkedList();
+        this.seats = new SeatHashTable();
         this.next = null;
     }
 
     public void incrementTicketSales() {
-        this.ticketPrice++;
+        this.ticketSales++;
+    }
+
+    public void decrementTicketSales() {
+        this.ticketSales--;
     }
 
     public void addToRevenue(double price) {
@@ -78,8 +82,7 @@ public class Movie {
         return "Movie: " + this.title +
                 "\nDirector: " + this.director +
                 "\nDuration: " + this.duration + " minutes" +
-                "\nTicket Price: $" + this.ticketPrice;
+                "\nTicket Price: $" + this.ticketPrice + "\n"
+                + "\n";
     }
 }
-
-
