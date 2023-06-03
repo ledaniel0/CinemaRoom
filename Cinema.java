@@ -5,9 +5,11 @@ import java.util.Scanner;
 
 public class Cinema {
     private MovieLinkedList movies;
+    private Employee employee;
 
     public Cinema() {
         movies = new MovieLinkedList();
+        employee = new Employee(movies);
     }
 
     public MovieLinkedList getMovies() {
@@ -19,7 +21,7 @@ public class Cinema {
         return seat != null && seat.isAvailable();
     }
 
-    public void sellTicket(Movie movie, Seat seat, Customer customer) {
+    private void sellTicket(Movie movie, Seat seat, Customer customer) {
         if (isSeatAvailable(movie, seat.getRow(), seat.getColumn())) {
             seat.setAvailable(false);
             seat.setCustomer(customer);
@@ -169,4 +171,67 @@ public class Cinema {
         }
         return false;
     }
+
+    public void rateAndReview(Scanner scanner) {
+        System.out.println("Enter the movie title to rate and review:");
+        scanner.nextLine();
+        String movieTitle = scanner.nextLine();
+        Movie movie = movies.searchMovie(movieTitle);
+        if (movie != null) {
+            System.out.println("Rate the movie (1-5):");
+            int rating = scanner.nextInt();
+            scanner.nextLine();
+            System.out.println("What is your name?");
+            String name = scanner.nextLine();
+            System.out.println("Write a review:");
+            String reviewComment = scanner.nextLine();
+            Review review = new Review(name, rating, reviewComment);
+            movie.addReview(review);
+            System.out.println("Rating and review submitted successfully.");
+        } else {
+            System.out.println("Movie not found.");
+        }
+    }
+
+    public void showMovieRatings() {
+        movies.showMovieRatings();
+    }
+
+    public void printFilteredMovies(Scanner scanner) {
+        System.out.println("Enter the genre to filter movies (leave blank for all movies):");
+        String genre = scanner.nextLine();
+        System.out.println("Filtered Movies:");
+        System.out.println("-------------------------");
+        movies.printFilteredMovies(genre);
+        System.out.println("-------------------------");
+    }
+
+    public void searchMovies(Scanner scanner) {
+        System.out.println("Enter the search query:");
+        String query = scanner.nextLine();
+        System.out.println("Search Results:");
+        System.out.println("-------------------------");
+        Movie searchedMovie = movies.searchMovie(query);
+        System.out.println(searchedMovie.toString());
+        System.out.println("-------------------------");
+    }
+
+    public void addMovie(Scanner scanner) {
+        if (employee.login(scanner)) {
+            employee.addMovie(scanner);
+        }
+    }
+
+    public void removeMovie(Scanner scanner) {
+        if (employee.login(scanner)) {
+            employee.removeMovie(scanner);
+        }
+    }
+
+    public void fixMoviePrice(Scanner scanner) {
+        if (employee.login(scanner)) {
+            employee.fixMoviePrice(scanner);
+        }
+    }
+
 }
