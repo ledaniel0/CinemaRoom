@@ -47,8 +47,11 @@ public class SeatHashTable {
         for (int row = 1; row <= totalRows; row++) {
             for (int column = 1; column <= seatsPerRow; column++) {
                 Seat seat = findSeat(row, column);
-                String symbol = seat.isAvailable() ? "O" : "x";
-                System.out.print(symbol + " ");
+                if (seat != null) {
+                    System.out.print(seat.getSymbol() + " ");
+                } else {
+                    System.out.print("- "); // Print a dash for unavailable seats
+                }
             }
             System.out.println();
         }
