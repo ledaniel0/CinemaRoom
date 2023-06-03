@@ -4,6 +4,7 @@ public class Seat {
     private int row;
     private int column;
     private boolean available;
+    private String symbol;
     private Movie movie;
     private Customer customer;
     public Seat next;
@@ -22,6 +23,10 @@ public class Seat {
         this.available = true;
         this.next = null;
         this.movie = null;
+    }
+
+    public String getSymbol() {
+        return symbol;
     }
 
     public Customer getCustomer() {
@@ -54,6 +59,11 @@ public class Seat {
 
     public void setAvailable(boolean available) {
         this.available = available;
+        if (available) {
+            this.symbol = "O";
+        } else {
+            this.symbol = "X";
+        }
     }
 
     public String toString() {
