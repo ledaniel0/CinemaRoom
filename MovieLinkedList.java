@@ -41,8 +41,19 @@ public class MovieLinkedList {
         }
     }
 
+    public Movie searchMovie(String movieTitle) {
+        MovieNode current = head;
+        while (current != null) {
+            if (movieTitle.equalsIgnoreCase(current.movie.getTitle())) {
+                return current.movie;
+            }
+            current = current.next;
+        }
+        return null;
+    }
+
     // Traverse and print the linked list of movies
-    public void traverse() {
+    public void traverseStats() {
         MovieNode current = head;
         while (current != null) {
             System.out.println("Movie: " + current.movie.getTitle());
@@ -51,6 +62,16 @@ public class MovieLinkedList {
             System.out.println("-------------------------");
             current = current.next;
         }
+    }
+
+    public String toString() {
+        MovieNode current = head;
+        String movies = "";
+        while (current != null) {
+            movies += current.movie.toString();
+            current = current.next;
+        }
+        return movies;
     }
 
     // Inner class representing a node in the linked list
@@ -65,4 +86,6 @@ public class MovieLinkedList {
         }
     }
 }
+
+
 
