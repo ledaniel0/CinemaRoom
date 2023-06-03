@@ -1,5 +1,10 @@
 package FinalProject;
 
+/*
+    use a map
+        the key will be a string for the movie
+        each key will be a seat
+ */
 public class SeatLinkedList {
     private Seat head;
 
@@ -60,6 +65,5 @@ public class SeatLinkedList {
         }
         return null;
     }
-
 }
 
