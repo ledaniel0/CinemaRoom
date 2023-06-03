@@ -29,14 +29,14 @@ public class CinemaRoomManager {
             System.out.println("1: Look at Movie Schedule");
             System.out.println("2: Buy a ticket");
             System.out.println("3: Show Movie statistics");
+            System.out.println("4: Refund ticket");
             System.out.println("0: Exit");
             System.out.println("-------------------------");
+            System.out.print("Action: ");
 
             switch (scanner.nextInt()) {
                 case 0:
-                    System.out.println("Thank you for using Cinema Room Manager." +
-                            " We look forward to see you again." +
-                            " Goodbye!");
+                    System.out.println("Thank you for using Cinema Room Manager. We look forward to seeing you again. Goodbye!");
                     System.out.println("-------------------------");
                     System.exit(0);
                     break;
@@ -46,43 +46,13 @@ public class CinemaRoomManager {
                     cinema.printMovieSchedule();
                     break;
                 case 2:
-                    /*
-                    passes in the movie title
-                    user types in the movie title
-                    loops through linkedlist searching for movie
-
-                    if a movie is found, print out the seats
-                    the user will select a seat, if the seat is available,
-                    ask the user how much money they have, if it is greater than
-                    the ticketPrice of the movie, print enjoy your movie
-
-                     */
-                    System.out.println("Enter the movie title:");
-                    Scanner buyTicket = new Scanner(System.in);
-                    String movieTitle = buyTicket.nextLine();
-                    Movie buyMovie = cinema.getMovies().searchMovie(movieTitle);
-                    if (buyMovie != null) {
-                        //print out the seats, then ask which row and then which column
-                        System.out.println("What row would you like?");
-                        int row = buyTicket.nextInt();
-                        System.out.println("What column would you like?");
-                        int column = buyTicket.nextInt();
-                        buyTicket.nextLine();
-                        Seat selectedSeat = new Seat(row, column, buyMovie);
-                        // ask the user what their name and email is
-                        System.out.println("What is your name?");
-                        String name = buyTicket.nextLine();
-                        System.out.println("What is your email?");
-                        String email = buyTicket.nextLine();
-                        Customer buyingCustomer = new Customer(name, email);
-                        System.out.println(cinema.isSeatAvailable(buyMovie, row, column));
-                        if (cinema.isSeatAvailable(buyMovie, row, column)) {
-                            cinema.sellTicket(buyMovie, selectedSeat, buyingCustomer);
-                        }
-                    }
+                    cinema.buyTicket(scanner);
                     break;
                 case 3:
                     cinema.showStatistics();
+                    break;
+                case 4:
+                    cinema.refundTicket(scanner);
                     break;
                 default:
                     System.out.println("Invalid Choice. Pick another action");
