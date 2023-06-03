@@ -15,7 +15,7 @@ public class CinemaRoomManager {
             while (fileReader.hasNextLine()) {
                 String info = fileReader.nextLine();
                 String[] arr = info.split(" ");
-                Movie movie = new Movie(arr[0], arr[1], Integer.parseInt(arr[2]), Double.parseDouble(arr[3]));
+                Movie movie = new Movie(arr[0], arr[1], arr[2], Integer.parseInt(arr[3]), Double.parseDouble(arr[4]));
                 cinema.getMovies().addMovie(movie);
             }
         } catch (FileNotFoundException e) {
@@ -30,6 +30,11 @@ public class CinemaRoomManager {
             System.out.println("2: Buy a ticket");
             System.out.println("3: Show Movie statistics");
             System.out.println("4: Refund ticket");
+            System.out.println("5: Review a Movie");
+            System.out.println("6: View Movie Ratings");
+            System.out.println("7: Search for a Movie");
+            System.out.println("8: Filter Movies");
+            System.out.println("9: Employee Login");
             System.out.println("0: Exit");
             System.out.println("-------------------------");
             System.out.print("Action: ");
@@ -53,6 +58,46 @@ public class CinemaRoomManager {
                     break;
                 case 4:
                     cinema.refundTicket(scanner);
+                    break;
+                case 5:
+                    cinema.rateAndReview(scanner);
+                    break;
+                case 6:
+                    cinema.showMovieRatings();
+                    break;
+                case 7:
+                    cinema.searchMovies(scanner);
+                    break;
+                case 8:
+                    cinema.printFilteredMovies(scanner);
+                    break;
+                case 9:
+                    System.out.println("Welcome Employee. What would you like to do?");
+                    System.out.println("-------------------------");
+                    System.out.println("1: Add Movie");
+                    System.out.println("2: Remove Movie");
+                    System.out.println("3: Fix Ticket Price");
+                    System.out.println("0: Exit");
+                    System.out.println("-------------------------");
+                    System.out.print("Action: ");
+                    int employeeAction = scanner.nextInt();
+                    scanner.nextLine();
+                    switch (employeeAction) {
+                        case 0:
+                            break;
+                        case 1:
+                            cinema.addMovie(scanner);
+                            break;
+                        case 2:
+                            cinema.removeMovie(scanner);
+                            break;
+                        case 3:
+                            cinema.fixMoviePrice(scanner);
+                            break;
+                        default:
+                            System.out.println("Invalid Choice. Pick another action");
+                            break;
+                    }
                     break;
                 default:
                     System.out.println("Invalid Choice. Pick another action");
