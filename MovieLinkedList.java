@@ -41,6 +41,29 @@ public class MovieLinkedList {
         }
     }
 
+    public boolean removeMovie(String movieTitle) {
+        Movie movie = searchMovie(movieTitle);
+        if (movie == null) {
+            return false;
+        }
+        if (head == null) {
+            return true;
+        }
+
+        if (head.movie == movie) {
+            head = head.next;
+        } else {
+            MovieNode current = head;
+            while (current.next != null && current.next.movie != movie) {
+                current = current.next;
+            }
+            if (current.next != null) {
+                current.next = current.next.next;
+            }
+        }
+        return true;
+    }
+
     public Movie searchMovie(String movieTitle) {
         MovieNode current = head;
         while (current != null) {
@@ -59,6 +82,36 @@ public class MovieLinkedList {
             System.out.println("Movie: " + current.movie.getTitle());
             System.out.println("Ticket Sales: " + current.movie.getTicketSales());
             System.out.println("Revenue: $" + current.movie.getRevenue());
+            System.out.println("-------------------------");
+            current = current.next;
+        }
+    }
+
+    public void printFilteredMovies(String genre) {
+        MovieNode current = head;
+        boolean foundMovies = false;
+
+        while (current != null) {
+            if (current.movie.getGenre().equalsIgnoreCase(genre)) {
+                System.out.println(current.movie.toString());
+                foundMovies = true;
+            }
+            current = current.next;
+        }
+
+        if (!foundMovies) {
+            System.out.println("No movies found in the specified genre.");
+        }
+    }
+
+    public void showMovieRatings() {
+        MovieNode current = head;
+
+        while (current != null) {
+            System.out.println("Movie: " + current.movie.getTitle());
+            System.out.println("Average Rating: " + current.movie.getAverageRating());
+            System.out.println("Reviews:");
+            current.movie.getReviews().forEach(review -> System.out.println(review));
             System.out.println("-------------------------");
             current = current.next;
         }
@@ -86,6 +139,4 @@ public class MovieLinkedList {
         }
     }
 }
-
-
 
