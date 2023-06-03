@@ -1,24 +1,39 @@
 package FinalProject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Movie {
     private String title;
     private String director;
+    private String genre;
     private int duration;
     private int ticketSales;
     private double revenue;
     private double ticketPrice;
     public SeatHashTable seats;
-    public Movie next;
+    private Movie next;
+    private List<Review> reviews;
 
-    public Movie(String title, String director, int duration, double ticketPrice) {
+    public Movie(String title, String director, String genre, int duration, double ticketPrice) {
         this.title = title;
         this.director = director;
+        this.genre = genre;
         this.duration = duration;
         this.ticketPrice = ticketPrice;
         this.revenue = 0;
         this.ticketSales = 0;
         this.seats = new SeatHashTable();
         this.next = null;
+        this.reviews = new ArrayList<>();
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
     public void incrementTicketSales() {
@@ -77,12 +92,30 @@ public class Movie {
         this.duration = duration;
     }
 
+    public void addReview(Review review) {
+        reviews.add(review);
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public double getAverageRating() {
+        if (reviews.isEmpty()) {
+            return 0;
+        }
+        double sum = 0;
+        for (Review review : reviews) {
+            sum += review.getRating();
+        }
+        return sum / reviews.size();
+    }
+
     @Override
     public String toString() {
         return "Movie: " + this.title +
                 "\nDirector: " + this.director +
                 "\nDuration: " + this.duration + " minutes" +
-                "\nTicket Price: $" + this.ticketPrice + "\n"
-                + "\n";
+                "\nTicket Price: $" + this.ticketPrice + "\n";
     }
 }
