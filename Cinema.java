@@ -2,34 +2,23 @@ package FinalProject;
 
 public class Cinema {
     private MovieLinkedList movies;
-    private SeatLinkedList seats;
-    private MovieSchedule movieSchedule;
 
     public Cinema() {
         movies = new MovieLinkedList();
-        seats = new SeatLinkedList();
-        movieSchedule = new MovieSchedule();
-    }
-
-    public void addMovie(Movie movie) {
-        movies.addMovie(movie);
-    }
-
-    public void removeMovie(Movie movie) {
-        movies.removeMovie(movie);
     }
 
     public MovieLinkedList getMovies() {
         return movies;
     }
 
-    public boolean isSeatAvailable(Movie movie, Seat seat) {
+    public boolean isSeatAvailable(Movie movie, int row, int column) {
         // Code to check if the given seat is available for the movie
+//        seats.searchSeat(row, column);
         return false;
     }
 
     public void sellTicket(Movie movie, Seat seat, Customer customer) {
-        if (isSeatAvailable(movie, seat)) {
+        if (isSeatAvailable(movie, seat.getRow(), seat.getColumn())) {
             seat.setSold();
             movie.incrementTicketSales();
             movie.addToRevenue(movie.getTicketPrice());
@@ -42,11 +31,12 @@ public class Cinema {
 
     public void showStatistics() {
         System.out.println("Ticket Sales Statistics:");
-        movies.traverse();
+        movies.traverseStats();
     }
 
-    public MovieSchedule getMovieSchedule() {
-        return movieSchedule;
+    public void printMovieSchedule() {
+        System.out.println(movies.toString());
     }
 }
+
 
