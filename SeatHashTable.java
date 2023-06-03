@@ -40,4 +40,17 @@ public class SeatHashTable {
             }
         }
     }
+
+    public void printSeats() {
+        int totalRows = 10;
+        int seatsPerRow = 20;
+        for (int row = 1; row <= totalRows; row++) {
+            for (int column = 1; column <= seatsPerRow; column++) {
+                Seat seat = findSeat(row, column);
+                String symbol = seat.isAvailable() ? "O" : "x";
+                System.out.print(symbol + " ");
+            }
+            System.out.println();
+        }
+    }
 }
