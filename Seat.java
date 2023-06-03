@@ -56,10 +56,6 @@ public class Seat {
         this.available = available;
     }
 
-    public void setSold() {
-        this.available = false;
-    }
-
     public String toString() {
         return "Row: " + this.row +
                 " Column: " + this.column;
