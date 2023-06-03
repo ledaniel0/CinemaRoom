@@ -4,6 +4,8 @@ package FinalProject;
     use a map
         the key will be a string for the movie
         each key will be a seat
+        [][][][][][][][][][][][][]
+        [][][][][][][][][][][][][]
  */
 public class SeatLinkedList {
     private Seat head;
@@ -48,14 +50,7 @@ public class SeatLinkedList {
         }
     }
 
-    public void traverse() {
-        Seat current = head;
-        while (current != null) {
-            current = current.next;
-        }
-    }
-
-    public Seat searchSeat(int row, int column) {
+    public Seat findSeat(int row, int column) {
         Seat current = head;
         while (current != null) {
             if (current.getRow() == row && current.getColumn() == column) {
@@ -66,4 +61,3 @@ public class SeatLinkedList {
         return null;
     }
 }
-
