@@ -5,6 +5,7 @@ public class Seat {
     private int column;
     private boolean available;
     private Movie movie;
+    private Customer customer;
     public Seat next;
 
     public Seat(int row, int column, Movie movie) {
@@ -13,6 +14,22 @@ public class Seat {
         this.available = true;
         this.movie = movie;
         this.next = null;
+    }
+
+    public Seat(int row, int column) {
+        this.row = row;
+        this.column = column;
+        this.available = true;
+        this.next = null;
+        this.movie = null;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public Movie getMovie() {
@@ -32,24 +49,20 @@ public class Seat {
     }
 
     public boolean isAvailable() {
-        return available;
+        return this.available;
     }
 
     public void setAvailable(boolean available) {
         this.available = available;
     }
 
-    public boolean getSold(Seat seat) {
-        if (!seat.isAvailable()) {
-            return true;
-        }
-        return false;
-    }
-
     public void setSold() {
         this.available = false;
     }
+
+    public String toString() {
+        return "Row: " + this.row +
+                " Column: " + this.column;
+    }
 }
-
-
 
