@@ -7,6 +7,7 @@ public class Movie {
     private int ticketSales;
     private double revenue;
     private double ticketPrice;
+    private SeatLinkedList seats;
     public Movie next;
 
     public Movie(String title, String director, int duration, double ticketPrice) {
@@ -16,6 +17,7 @@ public class Movie {
         this.ticketPrice = ticketPrice;
         this.revenue = 0;
         this.ticketSales = 0;
+        this.seats = new SeatLinkedList();
         this.next = null;
     }
 
@@ -75,7 +77,9 @@ public class Movie {
     public String toString() {
         return "Movie: " + this.title +
                 "\nDirector: " + this.director +
-                "\nDuration: " + this.duration + " minutes";
+                "\nDuration: " + this.duration + " minutes" +
+                "\nTicket Price: $" + this.ticketPrice;
     }
 }
+
 
