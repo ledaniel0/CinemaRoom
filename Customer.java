@@ -5,14 +5,12 @@ public class Customer {
     private String email;
     private Seat seat;
 
-    // Constructor to initialize the Customer object
     public Customer(String name, String email, Seat seat) {
         this.name = name;
         this.email = email;
         this.seat = seat;
     }
 
-    // Getters and setters for the customer attributes
     public Customer(String name, String email) {
         this.name = name;
         this.email = email;
@@ -41,7 +39,7 @@ public class Customer {
     public Seat getSeat() {
         return seat;
     }
-    
+
     @Override
     public String toString() {
         return "Name: " + this.name +
