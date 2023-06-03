@@ -4,13 +4,23 @@ public class Seat {
     private int row;
     private int column;
     private boolean available;
+    private Movie movie;
     public Seat next;
 
-    public Seat(int row, int column) {
+    public Seat(int row, int column, Movie movie) {
         this.row = row;
         this.column = column;
         this.available = true;
+        this.movie = movie;
         this.next = null;
+    }
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
     public int getRow() {
@@ -40,4 +50,6 @@ public class Seat {
         this.available = false;
     }
 }
+
+
 
