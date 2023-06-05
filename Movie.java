@@ -12,7 +12,6 @@ public class Movie {
     private double revenue;
     private double ticketPrice;
     public SeatHashTable seats;
-    private Movie next;
     private List<Review> reviews;
 
     public Movie(String title, String director, String genre, int duration, double ticketPrice) {
@@ -24,7 +23,6 @@ public class Movie {
         this.revenue = 0;
         this.ticketSales = 0;
         this.seats = new SeatHashTable();
-        this.next = null;
         this.reviews = new ArrayList<>();
     }
 
@@ -115,6 +113,7 @@ public class Movie {
     public String toString() {
         return "Movie: " + this.title +
                 "\nDirector: " + this.director +
+                "\nGenre: " + this.genre +
                 "\nDuration: " + this.duration + " minutes" +
                 "\nTicket Price: $" + this.ticketPrice + "\n";
     }
