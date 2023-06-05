@@ -22,25 +22,6 @@ public class MovieLinkedList {
         }
     }
 
-    // Remove a movie from the linked list
-    public void removeMovie(Movie movie) {
-        if (head == null) {
-            return;
-        }
-
-        if (head.movie == movie) {
-            head = head.next;
-        } else {
-            MovieNode current = head;
-            while (current.next != null && current.next.movie != movie) {
-                current = current.next;
-            }
-            if (current.next != null) {
-                current.next = current.next.next;
-            }
-        }
-    }
-
     public boolean removeMovie(String movieTitle) {
         Movie movie = searchMovie(movieTitle);
         if (movie == null) {
@@ -122,6 +103,7 @@ public class MovieLinkedList {
         String movies = "";
         while (current != null) {
             movies += current.movie.toString();
+            movies += "\n";
             current = current.next;
         }
         return movies;
@@ -132,10 +114,21 @@ public class MovieLinkedList {
         private Movie movie;
         private MovieNode next;
 
-        // Constructor to initialize the MovieNode object
         public MovieNode(Movie movie) {
             this.movie = movie;
             this.next = null;
+        }
+
+        public Movie getMovie() {
+            return movie;
+        }
+
+        public MovieNode getNext() {
+            return next;
+        }
+
+        public void setNext(MovieNode next) {
+            this.next = next;
         }
     }
 }
