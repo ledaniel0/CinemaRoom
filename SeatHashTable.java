@@ -56,4 +56,10 @@ public class SeatHashTable {
             System.out.println();
         }
     }
+
+    public void updateSeatAvailability(Seat seat) {
+        String key = generateKey(seat.getRow(), seat.getColumn());
+        seats.replace(key, seat);
+    }
+
 }
