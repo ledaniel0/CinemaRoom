@@ -39,7 +39,9 @@ public class CinemaRoomManager {
             System.out.println("-------------------------");
             System.out.print("Action: ");
 
-            switch (scanner.nextInt()) {
+            int userChoice = getValidInput(scanner, 0, 9);
+
+            switch (userChoice) {
                 case 0:
                     System.out.println("Thank you for using Cinema Room Manager. We look forward to seeing you again. Goodbye!");
                     System.out.println("-------------------------");
@@ -47,7 +49,7 @@ public class CinemaRoomManager {
                     break;
                 case 1:
                     System.out.println("Movies:");
-                    System.out.println("-------------------------");
+                    System.out.println();
                     cinema.printMovieSchedule();
                     break;
                 case 2:
@@ -80,8 +82,8 @@ public class CinemaRoomManager {
                     System.out.println("0: Exit");
                     System.out.println("-------------------------");
                     System.out.print("Action: ");
-                    int employeeAction = scanner.nextInt();
-                    scanner.nextLine();
+                    int employeeAction = getValidInput(scanner, 0, 3);
+                    System.out.println();
                     switch (employeeAction) {
                         case 0:
                             break;
@@ -104,5 +106,27 @@ public class CinemaRoomManager {
                     break;
             }
         }
+    }
+
+    private static int getValidInput(Scanner scanner, int min, int max) {
+        int input;
+        while (true) {
+            String userInput = scanner.nextLine().trim();
+            if (userInput.isEmpty()) {
+                System.out.println("Invalid input. Please enter a number between " + min + " and " + max);
+                continue;
+            }
+            try {
+                input = Integer.parseInt(userInput);
+                if (input >= min && input <= max) {
+                    break;
+                } else {
+                    System.out.println("Invalid input. Please enter a number between " + min + " and " + max);
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number between " + min + " and " + max);
+            }
+        }
+        return input;
     }
 }
