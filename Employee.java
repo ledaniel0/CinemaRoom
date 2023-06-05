@@ -35,10 +35,9 @@ public class Employee {
         System.out.println("Enter the movie genre:");
         String genre = scanner.nextLine();
         System.out.println("Enter the movie duration (in minutes):");
-        int duration = scanner.nextInt();
+        int duration = getValidInput(scanner, "Duration", true);
         System.out.println("Enter the movie ticket price:");
-        double ticketPrice = scanner.nextDouble();
-        scanner.nextLine();
+        double ticketPrice = getValidInput(scanner, "Ticket price", false);
 
         Movie newMovie = new Movie(title, director, genre, duration, ticketPrice);
         movieList.addMovie(newMovie);
@@ -67,13 +66,33 @@ public class Employee {
 
         if (movie != null) {
             System.out.println("Enter the new ticket price:");
-            double newPrice = scanner.nextDouble();
-            scanner.nextLine();
+            double newPrice = getValidInput(scanner, "New ticket price", false);
             movie.setTicketPrice(newPrice);
             System.out.println("Movie price updated successfully.");
         } else {
             System.out.println("Movie not found.");
         }
+    }
+
+    private int getValidInput(Scanner scanner, String inputName, boolean isInteger) {
+        int intValue = -1;
+        double doubleValue = -1.0;
+        boolean isValidInput = false;
+        do {
+            String inputString = scanner.nextLine().trim();
+            try {
+                if (isInteger) {
+                    intValue = Integer.parseInt(inputString);
+                    isValidInput = true;
+                } else {
+                    doubleValue = Double.parseDouble(inputString);
+                    isValidInput = true;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. " + inputName + " should be a " + (isInteger ? "integer" : "number") + ".");
+            }
+        } while (!isValidInput);
+        return isInteger ? intValue : (int) doubleValue;
     }
 }
 
