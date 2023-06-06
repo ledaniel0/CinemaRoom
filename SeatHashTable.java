@@ -7,7 +7,6 @@ public class SeatHashTable {
 
     public SeatHashTable() {
         seats = new HashMap<>();
-        createSeats();
     }
 
     public boolean isEmpty() {
@@ -27,39 +26,4 @@ public class SeatHashTable {
     private String generateKey(int row, int column) {
         return row + "-" + column;
     }
-
-    private void createSeats() {
-        int totalRows = 10;
-        int seatsPerRow = 20;
-
-        for (int row = 1; row <= totalRows; row++) {
-            for (int column = 1; column <= seatsPerRow; column++) {
-                Seat seat = new Seat(row, column);
-                seat.setAvailable(true);
-                addSeat(seat);
-            }
-        }
-    }
-
-    public void printSeats() {
-        int totalRows = 10;
-        int seatsPerRow = 20;
-        for (int row = 1; row <= totalRows; row++) {
-            for (int column = 1; column <= seatsPerRow; column++) {
-                Seat seat = findSeat(row, column);
-                if (seat != null) {
-                    System.out.print(seat.getSymbol() + " ");
-                } else {
-                    System.out.print("- "); // Print a dash for unavailable seats
-                }
-            }
-            System.out.println();
-        }
-    }
-
-    public void updateSeatAvailability(Seat seat) {
-        String key = generateKey(seat.getRow(), seat.getColumn());
-        seats.replace(key, seat);
-    }
-
 }
