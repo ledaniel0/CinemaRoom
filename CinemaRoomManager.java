@@ -15,7 +15,7 @@ public class CinemaRoomManager {
             while (fileReader.hasNextLine()) {
                 String info = fileReader.nextLine();
                 String[] arr = info.split(" ");
-                Movie movie = new Movie(arr[0], arr[1], arr[2], Integer.parseInt(arr[3]), Double.parseDouble(arr[4]));
+                Movie movie = new Movie(arr[0], arr[1], arr[2], Integer.parseInt(arr[3]), Double.parseDouble(arr[4]), new TheaterTicketSystem());
                 cinema.getMovies().addMovie(movie);
             }
         } catch (FileNotFoundException e) {
