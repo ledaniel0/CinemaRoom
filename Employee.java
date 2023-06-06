@@ -6,6 +6,7 @@ public class Employee {
     private final String USERNAME = "admin";
     private final String PASSWORD = "admin";
     private MovieLinkedList movieList;
+    private TheaterTicketSystem ticketSystem = new TheaterTicketSystem();
 
     public Employee(MovieLinkedList movieList) {
         this.movieList = movieList;
@@ -39,7 +40,7 @@ public class Employee {
         System.out.println("Enter the movie ticket price:");
         double ticketPrice = getValidInput(scanner, "Ticket price", false);
 
-        Movie newMovie = new Movie(title, director, genre, duration, ticketPrice);
+        Movie newMovie = new Movie(title, director, genre, duration, ticketPrice, ticketSystem);
         movieList.addMovie(newMovie);
 
         System.out.println("Movie added successfully.");
