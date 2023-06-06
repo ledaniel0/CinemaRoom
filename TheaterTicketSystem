@@ -1,29 +1,54 @@
+package FinalProject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class TheaterTicketSystem {
     private static final int NUM_ROWS = 10;
-    private static final int NUM_COLS = 10;
-    private char[][] seats;
+    private static final int NUM_COLS = 20;
+    private Map<String, char[][]> movieSeats; // Map to store seating arrangements for each movie
 
     public TheaterTicketSystem() {
-        seats = new char[NUM_ROWS][NUM_COLS];
+        movieSeats = new HashMap<>();
+    }
+
+    public void createSeatingArrangement(String movieTitle) {
+        char[][] seats = new char[NUM_ROWS][NUM_COLS];
         for (int i = 0; i < NUM_ROWS; i++) {
             for (int j = 0; j < NUM_COLS; j++) {
                 seats[i][j] = 'O';
             }
         }
+        movieSeats.put(movieTitle, seats);
     }
 
-    public void sellSeat(int row, int col) {
+    public void sellSeatGraph(String movieTitle, int row, int col) {
+        char[][] seats = movieSeats.get(movieTitle);
+        if (seats == null) {
+            System.out.println("Movie not found. Please create seating arrangement for the movie first.");
+            return;
+        }
+
         if (row >= 1 && row <= NUM_ROWS && col >= 1 && col <= NUM_COLS) {
-            seats[row - 1][col - 1] = 'X';
-            System.out.println("Seat at Row " + row + ", Column " + col + " sold successfully.");
+            if (seats[row - 1][col - 1] == 'O') {
+                seats[row - 1][col - 1] = 'X';
+                System.out.println("Seat at Row " + row + ", Column " + col + " for movie '" + movieTitle + "' sold successfully.");
+            } else {
+                System.out.println("Seat at Row " + row + ", Column " + col + " is already sold.");
+            }
         } else {
             System.out.println("Invalid seat selection. Please choose a valid seat.");
         }
     }
 
+    public void printSeat(String movieTitle) {
+        char[][] seats = movieSeats.get(movieTitle);
+        if (seats == null) {
+            System.out.println("Movie not found. Please create seating arrangement for the movie first.");
+            return;
+        }
 
-    public void printSeatGraph() {
-        System.out.println("Seat Graph:");
+        System.out.println("Seat Graph for movie '" + movieTitle + "':");
         for (int i = 0; i < NUM_ROWS; i++) {
             for (int j = 0; j < NUM_COLS; j++) {
                 System.out.print(seats[i][j] + " ");
