@@ -11,10 +11,11 @@ public class Movie {
     private int ticketSales;
     private double revenue;
     private double ticketPrice;
+    private TheaterTicketSystem ticketSystem;
     public SeatHashTable seats;
     private List<Review> reviews;
 
-    public Movie(String title, String director, String genre, int duration, double ticketPrice) {
+    public Movie(String title, String director, String genre, int duration, double ticketPrice, TheaterTicketSystem ticketSystem) {
         this.title = title;
         this.director = director;
         this.genre = genre;
@@ -24,6 +25,18 @@ public class Movie {
         this.ticketSales = 0;
         this.seats = new SeatHashTable();
         this.reviews = new ArrayList<>();
+        this.ticketSystem = ticketSystem;
+        ticketSystem.createSeatingArrangement(title);
+    }
+
+    public void sellTicket(int row, int col) {
+        ticketSystem.sellSeatGraph(title, row, col);
+        incrementTicketSales();
+        addToRevenue(ticketPrice);
+    }
+
+    public void printSeatGraph() {
+        ticketSystem.printSeat(title);
     }
 
     public String getGenre() {
