@@ -22,6 +22,7 @@ public class Cinema {
 
     private void sellTicket(Movie movie, Seat seat, Customer customer) {
         if (isSeatAvailable(movie, seat.getRow(), seat.getColumn())) {
+            movie.sellTicket(seat.getRow(), seat.getColumn());
             seat.setAvailable(false);
             seat.setCustomer(customer);
             movie.incrementTicketSales();
@@ -64,7 +65,7 @@ public class Cinema {
         String movieTitle = scanner.nextLine();
         Movie buyMovie = movies.searchMovie(movieTitle);
         if (buyMovie != null) {
-            buyMovie.seats.printSeats();
+            buyMovie.printSeatGraph();
             System.out.println();
 
             int row = getValidInput(scanner, "row", 1, 10);
