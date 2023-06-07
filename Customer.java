@@ -1,5 +1,3 @@
-package FinalProject;
-
 public class Customer {
     private String name;
     private String email;
@@ -47,4 +45,3 @@ public class Customer {
                 "\nSeat: " + this.seat;
     }
 }
-
