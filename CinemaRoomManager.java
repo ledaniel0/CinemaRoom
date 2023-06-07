@@ -1,5 +1,3 @@
-package FinalProject;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -14,7 +12,7 @@ public class CinemaRoomManager {
             Scanner fileReader = new Scanner(file);
             while (fileReader.hasNextLine()) {
                 String info = fileReader.nextLine();
-                String[] arr = info.split(" ");
+                String[] arr = info.split("\\|");
                 Movie movie = new Movie(arr[0], arr[1], arr[2], Integer.parseInt(arr[3]), Double.parseDouble(arr[4]), new TheaterTicketSystem());
                 cinema.getMovies().addMovie(movie);
             }
