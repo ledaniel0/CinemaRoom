@@ -1,98 +1,135 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import java.util.Scanner;
+public class Movie {
+    private String title;
+    private String director;
+    private String genre;
+    private int duration;
+    private int ticketSales;
+    private double revenue;
+    private double ticketPrice;
+    private TheaterTicketSystem ticketSystem;
+    private List<Review> reviews;
 
-public class Employee {
-    private final String USERNAME = "admin";
-    private final String PASSWORD = "admin";
-    private MovieLinkedList movieList;
-    private TheaterTicketSystem ticketSystem = new TheaterTicketSystem();
-
-    public Employee(MovieLinkedList movieList) {
-        this.movieList = movieList;
+    public Movie(String title, String director, String genre, int duration, double ticketPrice, TheaterTicketSystem ticketSystem) {
+        this.title = title;
+        this.director = director;
+        this.genre = genre;
+        this.duration = duration;
+        this.ticketPrice = ticketPrice;
+        this.revenue = 0;
+        this.ticketSales = 0;
+        this.reviews = new ArrayList<>();
+        this.ticketSystem = ticketSystem;
+        ticketSystem.createSeatingArrangement(title);
     }
 
-    public boolean login(Scanner scanner) {
-        System.out.println("Employee Login");
-        System.out.println("Enter your USERNAME:");
-        String enteredUsername = scanner.nextLine();
-        System.out.println("Enter your PASSWORD:");
-        String enteredPassword = scanner.nextLine();
+    public void sellTicket(int row, int col) {
+        ticketSystem.sellSeatGraph(title, row, col);
+        incrementTicketSales();
+        addToRevenue(ticketPrice);
+    }
 
-        if (enteredUsername.equals(USERNAME) && enteredPassword.equals(PASSWORD)) {
-            System.out.println("Login successful!");
-            return true;
-        } else {
-            System.out.println("Invalid USERNAME or PASSWORD. Login failed.");
-            return false;
+    public void printSeatGraph() {
+        ticketSystem.printSeat(title);
+    }
+    public boolean refundTicketGraph(int row, int cal){
+       return ticketSystem.refundGraph(title, row, cal);
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public void incrementTicketSales() {
+        this.ticketSales++;
+    }
+
+    public void decrementTicketSales() {
+        this.ticketSales--;
+    }
+
+    public void addToRevenue(double price) {
+        this.revenue += price;
+    }
+
+    public double getRevenue() {
+        return this.revenue;
+    }
+
+    public void setRevenue(double revenue) {
+        this.revenue = revenue;
+    }
+
+    public double getTicketPrice() {
+        return this.ticketPrice;
+    }
+
+    public void setTicketPrice(double ticketPrice) {
+        this.ticketPrice = ticketPrice;
+    }
+
+    public int getTicketSales() {
+        return this.ticketSales;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public String getDirector() {
+        return this.director;
+    }
+
+    public int getDuration() {
+        return this.duration;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public void addReview(Review review) {
+        reviews.add(review);
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public double getAverageRating() {
+        if (reviews.isEmpty()) {
+            return 0;
         }
-    }
-
-    public void addMovie(Scanner scanner) {
-        System.out.println("Enter the movie title:");
-        String title = scanner.nextLine();
-        System.out.println("Enter the movie director:");
-        String director = scanner.nextLine();
-        System.out.println("Enter the movie genre:");
-        String genre = scanner.nextLine();
-        System.out.println("Enter the movie duration (in minutes):");
-        int duration = getValidInput(scanner, "Duration", true);
-        System.out.println("Enter the movie ticket price:");
-        double ticketPrice = getValidInput(scanner, "Ticket price", false);
-
-        Movie newMovie = new Movie(title, director, genre, duration, ticketPrice, ticketSystem);
-        movieList.addMovie(newMovie);
-
-        System.out.println("Movie added successfully.");
-    }
-
-    public void removeMovie(Scanner scanner) {
-        System.out.println("Enter the movie title to remove:");
-        String title = scanner.nextLine();
-
-        boolean removed = movieList.removeMovie(title);
-
-        if (removed) {
-            System.out.println("Movie removed successfully.");
-        } else {
-            System.out.println("Movie not found.");
+        double sum = 0;
+        for (Review review : reviews) {
+            sum += review.getRating();
         }
+        return sum / reviews.size();
     }
 
-    public void fixMoviePrice(Scanner scanner) {
-        System.out.println("Enter the movie title to fix the price:");
-        String title = scanner.nextLine();
 
-        Movie movie = movieList.searchMovie(title);
-
-        if (movie != null) {
-            System.out.println("Enter the new ticket price:");
-            double newPrice = getValidInput(scanner, "New ticket price", false);
-            movie.setTicketPrice(newPrice);
-            System.out.println("Movie price updated successfully.");
-        } else {
-            System.out.println("Movie not found.");
-        }
-    }
-
-    private int getValidInput(Scanner scanner, String inputName, boolean isInteger) {
-        int intValue = -1;
-        double doubleValue = -1.0;
-        boolean isValidInput = false;
-        do {
-            String inputString = scanner.nextLine().trim();
-            try {
-                if (isInteger) {
-                    intValue = Integer.parseInt(inputString);
-                    isValidInput = true;
-                } else {
-                    doubleValue = Double.parseDouble(inputString);
-                    isValidInput = true;
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. " + inputName + " should be a " + (isInteger ? "integer" : "number") + ".");
-            }
-        } while (!isValidInput);
-        return isInteger ? intValue : (int) doubleValue;
+    @Override
+    public String toString() {
+        return "Movie: " + this.title +
+                "\nDirector: " + this.director +
+                "\nGenre: " + this.genre +
+                "\nDuration: " + this.duration + " minutes" +
+                "\nTicket Price: $" + this.ticketPrice + "\n";
     }
 }
-
