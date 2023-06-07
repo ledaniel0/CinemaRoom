@@ -12,35 +12,6 @@ public class Cinema {
     public MovieLinkedList getMovies() {
         return movies;
     }
-
-
-
-    private void sellTicket(Movie movie, Seat seat, Customer customer) {
-            movie.sellTicket(seat.getRow(), seat.getColumn());
-            seat.setAvailable(false);
-            seat.setCustomer(customer);
-            movie.incrementTicketSales();
-            movie.addToRevenue(movie.getTicketPrice());
-            customer.setSeat(seat);
-        }
-
-
-    public boolean refundTicket(String movieTitle, int row, int column) {
-        Movie movie = movies.searchMovie(movieTitle);
-        if (movie != null) {
-            Seat seat = movie.seats.findSeat(row, column);
-            if (seat != null && seat.isAvailable()) {
-                double ticketPrice = movie.getTicketPrice();
-                movie.addToRevenue(ticketPrice);
-                movie.decrementTicketSales();
-                seat.setAvailable(true);
-                seat.setCustomer(null);
-                return true;
-            }
-        }
-        return false;
-    }
-
     public void showStatistics() {
         System.out.println("Ticket Sales Statistics:");
         System.out.println("-------------------------");
@@ -66,30 +37,41 @@ public class Cinema {
             Customer buyingCustomer = getCustomerDetails(scanner);
 
             sellTicket(buyMovie, selectedSeat, buyingCustomer);
+        }else{
+        System.out.println("Movie not found");
         }
     }
 
-    public boolean refundTicket(Scanner scanner) {
+    private void sellTicket(Movie movie, Seat seat, Customer customer) {
+        movie.sellTicket(seat.getRow(), seat.getColumn());
+        seat.setCustomer(customer);
+        customer.setSeat(seat);
+    }
+
+    public void refundTicket(Scanner scanner) {
         System.out.println("Enter the movie title:");
         String movieTitle = scanner.nextLine();
 
         Movie movie = movies.searchMovie(movieTitle);
+
         if (movie != null) {
             System.out.println();
 
             int row = getValidInput(scanner, "row", 1, 10);
             int column = getValidInput(scanner, "column", 1, 20);
 
-            movie.refundTicketGraph(row, column);
-        } else {
-            System.out.println("Movie not found.");
+            if (movie.refundTicketGraph(row, column)) {
+                double ticketPrice = movie.getTicketPrice();
+                movie.addToRevenue(ticketPrice);
+                movie.decrementTicketSales();
+            } else {
+                System.out.println("Movie not found.");
+            }
         }
-        return false;
     }
 
     public void rateAndReview(Scanner scanner) {
         System.out.println("Enter the movie title to rate and review:");
-        scanner.nextLine();
         String movieTitle = scanner.nextLine();
         Movie movie = movies.searchMovie(movieTitle);
         if (movie != null) {
