@@ -1,5 +1,3 @@
-package FinalProject;
-
 public class MovieLinkedList {
     private MovieNode head;
 
@@ -123,13 +121,5 @@ public class MovieLinkedList {
             return movie;
         }
 
-        public MovieNode getNext() {
-            return next;
-        }
-
-        public void setNext(MovieNode next) {
-            this.next = next;
-        }
     }
 }
-
