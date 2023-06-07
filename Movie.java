@@ -1,7 +1,8 @@
-package FinalProject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Movie {
     private String title;
@@ -12,7 +13,6 @@ public class Movie {
     private double revenue;
     private double ticketPrice;
     private TheaterTicketSystem ticketSystem;
-    public SeatHashTable seats;
     private List<Review> reviews;
 
     public Movie(String title, String director, String genre, int duration, double ticketPrice, TheaterTicketSystem ticketSystem) {
@@ -23,7 +23,6 @@ public class Movie {
         this.ticketPrice = ticketPrice;
         this.revenue = 0;
         this.ticketSales = 0;
-        this.seats = new SeatHashTable();
         this.reviews = new ArrayList<>();
         this.ticketSystem = ticketSystem;
         ticketSystem.createSeatingArrangement(title);
@@ -37,6 +36,9 @@ public class Movie {
 
     public void printSeatGraph() {
         ticketSystem.printSeat(title);
+    }
+    public boolean refundTicketGraph(int row, int cal){
+       return ticketSystem.refundGraph(title, row, cal);
     }
 
     public String getGenre() {
@@ -122,6 +124,7 @@ public class Movie {
         return sum / reviews.size();
     }
 
+
     @Override
     public String toString() {
         return "Movie: " + this.title +
@@ -131,3 +134,4 @@ public class Movie {
                 "\nTicket Price: $" + this.ticketPrice + "\n";
     }
 }
+
