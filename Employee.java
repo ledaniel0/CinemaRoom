@@ -1,5 +1,3 @@
-package FinalProject;
-
 import java.util.Scanner;
 
 public class Employee {
@@ -96,4 +94,3 @@ public class Employee {
         return isInteger ? intValue : (int) doubleValue;
     }
 }
-
