@@ -1,5 +1,3 @@
-package FinalProject;
-
 import java.util.Scanner;
 
 public class Cinema {
@@ -15,24 +13,17 @@ public class Cinema {
         return movies;
     }
 
-    public boolean isSeatAvailable(Movie movie, int row, int column) {
-        Seat seat = movie.seats.findSeat(row, column);
-        return seat != null && seat.isAvailable();
-    }
+
 
     private void sellTicket(Movie movie, Seat seat, Customer customer) {
-        if (isSeatAvailable(movie, seat.getRow(), seat.getColumn())) {
             movie.sellTicket(seat.getRow(), seat.getColumn());
             seat.setAvailable(false);
             seat.setCustomer(customer);
             movie.incrementTicketSales();
             movie.addToRevenue(movie.getTicketPrice());
             customer.setSeat(seat);
-            System.out.println("Ticket sold successfully. Thank you for purchasing!\n");
-        } else {
-            System.out.println("Sorry, the seat is not available.");
         }
-    }
+
 
     public boolean refundTicket(String movieTitle, int row, int column) {
         Movie movie = movies.searchMovie(movieTitle);
@@ -84,22 +75,12 @@ public class Cinema {
 
         Movie movie = movies.searchMovie(movieTitle);
         if (movie != null) {
-            movie.seats.printSeats();
             System.out.println();
 
             int row = getValidInput(scanner, "row", 1, 10);
             int column = getValidInput(scanner, "column", 1, 20);
 
-            if (isSeatAvailable(movie, row, column)) {
-                System.out.println("The seat is already available. Cannot refund the ticket.\n");
-            } else {
-                if (refundTicket(movieTitle, row, column)) {
-                    System.out.println("Ticket refunded successfully.\n");
-                    return true;
-                } else {
-                    System.out.println("Sorry, the ticket cannot be refunded.\n");
-                }
-            }
+            movie.refundTicketGraph(row, column);
         } else {
             System.out.println("Movie not found.");
         }
