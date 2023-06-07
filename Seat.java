@@ -1,4 +1,3 @@
-package FinalProject;
 
 public class Seat {
     private int row;
@@ -25,14 +24,6 @@ public class Seat {
         this.movie = null;
     }
 
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
@@ -53,22 +44,14 @@ public class Seat {
         return column;
     }
 
-    public boolean isAvailable() {
-        return this.available;
-    }
 
-    public void setAvailable(boolean available) {
-        this.available = available;
-        if (available) {
-            this.symbol = "O";
-        } else {
-            this.symbol = "X";
-        }
-    }
+
+
 
     public String toString() {
         return "Row: " + this.row +
                 " Column: " + this.column;
     }
 }
+
 
